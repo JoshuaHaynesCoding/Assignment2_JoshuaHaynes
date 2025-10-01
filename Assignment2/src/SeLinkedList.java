@@ -1,9 +1,10 @@
 public class SeLinkedList {
     SeLinkedList next;
+    SeLinkedList prev;  
     int a;
     int b;
     int c;
-    int index;  
+    int index;
 
     
     public SeLinkedList(int a, int b, int c, int index) {
@@ -12,14 +13,13 @@ public class SeLinkedList {
         this.c = c;
         this.index = index;
         this.next = null;
-        this.prev = null;
+        this.prev = null;  
     }
 
     
-
-public SeLinkedList(int a, int b, int c) {
-    this(a, b, c, 0);
-}
+    public SeLinkedList(int a, int b, int c) {
+        this(a, b, c, 0);
+    }
 
     @Override
     public String toString() {

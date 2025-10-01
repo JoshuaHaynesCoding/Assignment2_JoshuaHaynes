@@ -9,17 +9,16 @@ public class Player {
 
     // addPlayer
     public void addPlayer(int a, int b, int c) {
-    int newIndex = (head == null) ? 0 : head.index + 1;
-    SeLinkedList newNode = new SeLinkedList(a, b, c, newIndex);
+        int newIndex = (head == null) ? 0 : head.index + 1;
+        SeLinkedList newNode = new SeLinkedList(a, b, c, newIndex);
 
-    
-    newNode.next = head;   
-    if (head != null) {
-        head.prev = newNode;  
+        newNode.next = head;
+        if (head != null) {
+            head.prev = newNode;
+        }
+
+        head = newNode;
     }
-
-    head = newNode; 
-}
 
     // initializeList
     public void initializeList(PlayerData[] dataArray) {
@@ -50,15 +49,48 @@ public class Player {
         }
     }
 
+    
+    public void removeNode(SeLinkedList node) {
+        if (node == null) return;
+
+        
+        if (node == head) {
+            head = node.next;
+            if (head != null) {
+                head.prev = null;
+            }
+            return;
+        }
+
+        
+        if (node.prev != null) {
+            node.prev.next = node.next;
+        }
+        if (node.next != null) {
+            node.next.prev = node.prev;
+        }
+    }
+
+    
     public static void main(String[] args) {
-        System.out.println(">>> Running Task 8 + 9 test <<<");
+        System.out.println(">>> Testing removeNode <<<");
 
         PlayerData pd = new PlayerData();
         PlayerData[] dataArray = pd.getMyData();
-
         Player p = new Player();
         p.initializeList(dataArray);
 
-        p.findMaxWeight(); 
+        System.out.println("Before removal, head: " + p.head);
+
+        
+        p.removeNode(p.head);
+        System.out.println("After removing head, new head: " + p.head);
+
+        
+        p.removeNode(p.head.next);
+        System.out.println("After removing next node: " + p.head.next);
+
+        
+        p.findMaxWeight();
     }
 }
