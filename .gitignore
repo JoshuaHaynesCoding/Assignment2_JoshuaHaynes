@@ -1,1 +1,18 @@
 /bin/
+# Java build
+*.class
+*.log
+hs_err_pid*
+
+# Common build dirs
+/out/
+/bin/
+/target/
+
+# IDE settings
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
