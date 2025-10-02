@@ -12,12 +12,11 @@ public class Player {
         int newIndex = (head == null) ? 0 : head.index + 1;
         SeLinkedList newNode = new SeLinkedList(a, b, c, newIndex);
 
-        newNode.next = head;
+        newNode.next = head;   
         if (head != null) {
-            head.prev = newNode;
+            head.prev = newNode;  
         }
-
-        head = newNode;
+        head = newNode; 
     }
 
     // initializeList
@@ -28,7 +27,7 @@ public class Player {
     }
 
     // findMaxWeight
-    public void findMaxWeight() {
+    public SeLinkedList findMaxWeight() {
         SeLinkedList current = head;
         SeLinkedList maxNode = null;
         int maxWeight = Integer.MIN_VALUE;
@@ -47,13 +46,36 @@ public class Player {
         } else {
             System.out.println("List is empty.");
         }
+        return maxNode;
     }
 
-    
+    // findMinWeight
+    public SeLinkedList findMinWeight() {
+        SeLinkedList current = head;
+        SeLinkedList minNode = null;
+        int minWeight = Integer.MAX_VALUE;
+
+        while (current != null) {
+            int weight = current.a + current.b + current.c;
+            if (weight < minWeight) {
+                minWeight = weight;
+                minNode = current;
+            }
+            current = current.next;
+        }
+
+        if (minNode != null) {
+            System.out.println("Min weight player >> " + minNode + " and its weight=" + minWeight);
+        } else {
+            System.out.println("List is empty.");
+        }
+        return minNode;
+    }
+
+    // removeNode
     public void removeNode(SeLinkedList node) {
         if (node == null) return;
 
-        
         if (node == head) {
             head = node.next;
             if (head != null) {
@@ -62,7 +84,6 @@ public class Player {
             return;
         }
 
-        
         if (node.prev != null) {
             node.prev.next = node.next;
         }
@@ -71,26 +92,58 @@ public class Player {
         }
     }
 
+    // findMinMaxWeight (single traversal)
+    public void findMinMaxWeight() {
+        SeLinkedList current = head;
+        SeLinkedList minNode = null;
+        SeLinkedList maxNode = null;
+
+        int minWeight = Integer.MAX_VALUE;
+        int maxWeight = Integer.MIN_VALUE;
+
+        while (current != null) {
+            int weight = current.a + current.b + current.c;
+
+            if (weight < minWeight) {
+                minWeight = weight;
+                minNode = current;
+            }
+            if (weight > maxWeight) {
+                maxWeight = weight;
+                maxNode = current;
+            }
+
+            current = current.next;
+        }
+
+        if (minNode != null && maxNode != null) {
+            System.out.println("Min weight player >> " + minNode + " and its weight=" + minWeight);
+            System.out.println("Max weight player >> " + maxNode + " and its weight=" + maxWeight);
+        } else {
+            System.out.println("List is empty.");
+        }
+    }
+
     
     public static void main(String[] args) {
-        System.out.println(">>> Testing removeNode <<<");
+        System.out.println("[Joshua Haynes - Git Assignment]");
 
         PlayerData pd = new PlayerData();
         PlayerData[] dataArray = pd.getMyData();
+
         Player p = new Player();
         p.initializeList(dataArray);
 
-        System.out.println("Before removal, head: " + p.head);
+        for (int i = 1; i <= 3; i++) {
+            System.out.println(">>> round " + i + " <<<");
+            SeLinkedList minNode = p.findMinWeight();
+            SeLinkedList maxNode = p.findMaxWeight();
 
-        
-        p.removeNode(p.head);
-        System.out.println("After removing head, new head: " + p.head);
+            // remove both min and max
+            p.removeNode(minNode);
+            p.removeNode(maxNode);
+        }
 
-        
-        p.removeNode(p.head.next);
-        System.out.println("After removing next node: " + p.head.next);
-
-        
-        p.findMaxWeight();
+        System.out.println("[Done!]");
     }
 }
