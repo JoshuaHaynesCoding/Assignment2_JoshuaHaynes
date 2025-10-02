@@ -1,6 +1,6 @@
 public class SeLinkedList {
     SeLinkedList next;
-    SeLinkedList prev;  
+    SeLinkedList prev;   
     int a;
     int b;
     int c;
@@ -13,7 +13,7 @@ public class SeLinkedList {
         this.c = c;
         this.index = index;
         this.next = null;
-        this.prev = null;  
+        this.prev = null;
     }
 
     

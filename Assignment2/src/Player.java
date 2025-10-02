@@ -12,11 +12,11 @@ public class Player {
         int newIndex = (head == null) ? 0 : head.index + 1;
         SeLinkedList newNode = new SeLinkedList(a, b, c, newIndex);
 
-        newNode.next = head;   
+        newNode.next = head;
         if (head != null) {
-            head.prev = newNode;  
+            head.prev = newNode;
         }
-        head = newNode; 
+        head = newNode;
     }
 
     // initializeList
@@ -124,7 +124,7 @@ public class Player {
         }
     }
 
-    
+    // main demo
     public static void main(String[] args) {
         System.out.println("[Joshua Haynes - Git Assignment]");
 
@@ -134,12 +134,12 @@ public class Player {
         Player p = new Player();
         p.initializeList(dataArray);
 
-        for (int i = 1; i <= 3; i++) {
-            System.out.println(">>> round " + i + " <<<");
+        for (int i = 0; i < 3; i++) {
+            System.out.println(">>> round " + (i + 1) + " <<<");
+
             SeLinkedList minNode = p.findMinWeight();
             SeLinkedList maxNode = p.findMaxWeight();
 
-            // remove both min and max
             p.removeNode(minNode);
             p.removeNode(maxNode);
         }
